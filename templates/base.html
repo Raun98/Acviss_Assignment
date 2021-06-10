@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HOME</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: #D3D3D3;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+             float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+
+        li a:hover {
+            background-color: #111;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+        }
+        .submit-btn {
+            text-align:center;
+        }
+        .center-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+        body,html{
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar a {
+          float: left;
+          font-size: 16px;
+          color: white;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+        }
+        table{
+            overflow-y:scroll;
+            height:200px;
+            width:190px;
+            display:block;
+            border:1px solid red;
+        }
+
+        .dropdown {
+          float: left;
+          overflow: hidden;
+        }
+
+        .dropdown .dropbtn {
+          font-size: 16px;
+          border: none;
+          outline: none;
+          color: white;
+          padding: 14px 16px;
+          background-color: inherit;
+          font-family: inherit;
+          margin: 0;
+        }
+
+        .navbar a:hover, .dropdown:hover .dropbtn {
+          background-color: #A9A9A9;
+        }
+
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #f9f9f9;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+        }
+
+        .dropdown-content a {
+          float: none;
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+          text-align: left;
+        }
+
+        .dropdown-content a:hover {
+          background-color: #A9A9A9;
+        }
+
+        .dropdown:hover .dropdown-content {
+          display: block;
+        }
+    </style>
+</head>
+<body style="background-color: #585858;">
+{% if user.is_authenticated %}
+<ul>
+  <li style="float:right"><a href="/logout">Logout</a></li>
+  <li><a class="active" href="/home">Home</a></li>
+  <li><div class="navbar">
+
+  <div class="dropdown">
+    <button class="dropbtn">API
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="/api-token-auth">Generate Token</a>
+      <a href="/search">Search Code Base</a>
+    </div>
+    </div>
+  </div></li>
+</ul>
+{% else %}
+<ul>
+  <li style="float:right"><a href="/login">Login</a></li>
+  <li style="float:right"><a href="/signup">Signup</a></li>
+  <li><a class="active" href="/">Home</a></li>
+
+    <li><div class="navbar">
+
+  <div class="dropdown">
+    <button class="dropbtn">API
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#">Generate Token</a>
+      <a href="#">Search Code Base</a>
+    </div>
+  </div>
+</div></li>
+</ul>
+{% endif %}
+{% block content %}{% endblock %}
+</body>
+</html>

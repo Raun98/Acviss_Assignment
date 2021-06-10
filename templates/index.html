@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>First Page</title>
+
+</head>
+<body background-color="#585858	">
+
+
+    {% block content %}
+    {% if user.is_authenticated %}
+        <h1>Welcome {{ user.username }}</h1>
+    {% else %}
+        <h1>Welcome Guest</h1>
+    {% endif %}
+    <div class="center-box">
+    <form action='populateDB' method="post">
+    {% csrf_token %}
+    <label for="number_of_codes">Number of codes</label><br>
+    <input id="number_of_codes" type="number" name="number_of_codes" maxlength="100" required><br><br>
+    <label for="batch_name">Batch Name</label><br>
+    <input id="batch_name" type="text" name="batch_name" maxlength="100" required><br><br>
+    {% if user.is_authenticated %}
+    <div class="submit-btn">
+    <input type="submit" value="Generate Codes">
+        <br><br><br>
+
+    </div>
+
+    {% else %}
+        <h3>Login to create codes</h3>
+    {% endif %}
+    </div>
+    {% if user.is_authenticated %}
+    <h1>User History</h1>
+    <div class="center">
+    <table class ='table table-bordered table-hover' style="border-collapse:collapse;order-spacing: 0;border:none;background-color:#DCDCDC;">
+        <thead>
+        <tr>
+            <th>Batch Name</th>
+            <th>Codes</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for name,code in result %}
+        <tr>
+            <td>{{ name }}</td>
+            <td>{{ code }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    </div>
+{% endblock %}
+</body>
+</html>
