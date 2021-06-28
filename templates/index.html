@@ -18,11 +18,12 @@
     <div class="center-box">
     <form action='populateDB' method="post">
     {% csrf_token %}
+    {% if user.is_authenticated %}
     <label for="number_of_codes">Number of codes</label><br>
     <input id="number_of_codes" type="number" name="number_of_codes" maxlength="100" required><br><br>
     <label for="batch_name">Batch Name</label><br>
     <input id="batch_name" type="text" name="batch_name" maxlength="100" required><br><br>
-    {% if user.is_authenticated %}
+
     <div class="submit-btn">
     <input type="submit" value="Generate Codes">
         <br><br><br>
@@ -34,20 +35,22 @@
     {% endif %}
     </div>
     {% if user.is_authenticated %}
-    <h1>User History</h1>
+    <h1>{{ user.username }}'s code creation history</h1>
     <div class="center">
     <table class ='table table-bordered table-hover' style="border-collapse:collapse;order-spacing: 0;border:none;background-color:#DCDCDC;">
         <thead>
         <tr>
             <th>Batch Name</th>
             <th>Codes</th>
+            <th>Created At</th>
             </tr>
         </thead>
         <tbody>
-        {% for name,code in result %}
+        {% for name,code,time in result %}
         <tr>
             <td>{{ name }}</td>
             <td>{{ code }}</td>
+            <td>{{ time }}</td>
         </tr>
         {% endfor %}
     </table>

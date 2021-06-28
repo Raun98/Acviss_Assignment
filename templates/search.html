@@ -1,3 +1,4 @@
+{% extends 'base.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +7,29 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
-<body>
+<div>
+{% block content %}
 
-
+<div class="search-container">
+<form action="/search/" method="get">
+  <input type="text" placeholder="Search.." name="search">
+  <button type="submit"><i class="fa fa-search"></i></button>
+</form>
+</div>
+<div class="center">
+<table class ='table table-bordered table-hover' style="width:250px;border-collapse:collapse;order-spacing: 0;border:none;background-color:#DCDCDC;">
+    <tr>
+        <th>Batch Name</th>
+        <th>Code</th>
+    </tr>
+    {% for batch,code in results %}
+    <tr>
+        <td> {{ batch }} </td>
+        <td> {{ code }} </td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock %}
 </body>
 </html>

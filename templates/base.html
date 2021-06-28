@@ -49,6 +49,12 @@
             align-items: center;
             height: 200px;
         }
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+        }
         .navbar {
             overflow: hidden;
             background-color: #333;
@@ -70,11 +76,17 @@
         table{
             overflow-y:scroll;
             height:200px;
-            width:190px;
+            width:350px;
             display:block;
-            border:1px solid red;
+            border:2px solid red;
+        }
+        td {
+            text-align: center;
         }
 
+        th {
+          text-align: center;
+        }
         .dropdown {
           float: left;
           overflow: hidden;
@@ -126,7 +138,7 @@
 {% if user.is_authenticated %}
 <ul>
   <li style="float:right"><a href="/logout">Logout</a></li>
-  <li><a class="active" href="/home">Home</a></li>
+  <li><a class="active" href="/">Home</a></li>
   <li><div class="navbar">
 
   <div class="dropdown">

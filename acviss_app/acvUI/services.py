@@ -18,20 +18,20 @@ def populateDB(number, batch_name):
         cursor.execute(sql, val)
         dbconnect.commit()
     print('populate complete')
-    return redirect('/')
+    return redirect('/  ')
 
-def register_batch_update(name, batch_code):
-    sql = "INSERT INTO batch (batch_name, user_name) VALUES (%s, %s)"
+def register_batch_update(name, batch_code, num , time):
+    sql = "INSERT INTO batch (batch_name, user_name, number_of_codes, time_created) VALUES (%s, %s, %s, %s)"
     dbconnect = mysql.connector.connect(host='localhost', port='3306', user='raun', passwd='root', database='avcissdb')
     cursor = dbconnect.cursor()
-    val = (batch_code,name)
+    val = (batch_code,name, num, time)
     cursor.execute(sql,val)
     dbconnect.commit()
 
 def load_user_table(user):
     dbconnect = mysql.connector.connect(host='localhost', port='3306', user='raun', passwd='root', database='avcissdb')
     cursor = dbconnect.cursor()
-    cursor.execute('select distinct  codes.batch_name, code from batch,codes where batch.user_name= %s ;', (user,))
+    cursor.execute('select batch_name, number_of_codes, time_created from batch where user_name= %s ;', (user,))
     result = cursor.fetchall()
     dbconnect.commit()
     return result

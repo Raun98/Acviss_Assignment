@@ -19,13 +19,13 @@ from django.conf.urls import url
 from django.views.generic import TemplateView
 from django.contrib.auth import views as auth_views
 from acviss_app.acvUI import views as core_views
-from acviss_app.acvUI.views import FormPage,SearchView, HomePage
+from acviss_app.acvUI.views import FormPage, HomePage, search
 from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     path('', HomePage, name='home'),
     path('populateDB', FormPage, name='populatedb'),
-    path('search/', SearchView.as_view(), name='search'),
+    path('search/', search, name='search'),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
     url(r'^login/$', auth_views.LoginView.as_view(), name='login'),
     url(r'^logout/$', auth_views.LogoutView.as_view(), {'next_page': '/'}, name='logout'),
